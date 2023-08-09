@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.32.6",
+    "@tanstack/react-query-devtools": "^4.32.6",
     "bootstrap": "5.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -21,6 +23,9 @@
     "@types/react-dom": "^18.0.7",
     "@vitejs/plugin-react": "^2.2.0",
     "typescript": "^4.6.4",
-    "vite": "^3.2.0"
+    "vite": "^3.2.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3"
   }
 }
