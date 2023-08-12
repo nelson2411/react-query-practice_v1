@@ -1,24 +1,27 @@
-import { useQuery } from "@tanstack/react-query"
-import { gitHubApi } from "../../api/gitHubApi"
-import { Label } from "../interfaces/label"
-
-const getLabels = async (): Promise<Label[]> => {
-  const { data } = await gitHubApi.get<Label[]>("/labels")
-  console.log("data", data)
-  return data
-}
+import { useLabels } from "../hooks/useLabels"
+import LoadingIcon from "../../shared/components/LoadingIcon"
 
 export const LabelPicker = () => {
-  const labelsQuery = useQuery(["labels"], getLabels)
+  const { labelsQuery } = useLabels()
+
+  if (labelsQuery.isLoading) {
+    return <LoadingIcon />
+  }
 
   return (
     <div>
-      <span
-        className="badge rounded-pill m-1 label-picker"
-        style={{ border: `1px solid #ffccd3`, color: "#ffccd3" }}
-      >
-        Primary
-      </span>
+      {labelsQuery.data?.map((label) => (
+        <span
+          key={label.id}
+          className="badge rounded-pill m-1 label-picker"
+          style={{
+            border: `1px solid #${label.color}`,
+            color: "#${label.color}",
+          }}
+        >
+          {label.name}
+        </span>
+      ))}
     </div>
   )
 }
