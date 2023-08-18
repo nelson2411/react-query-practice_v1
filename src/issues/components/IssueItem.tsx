@@ -20,7 +20,7 @@ export const IssueItem: React.FC<Props> = ({ issue }) => {
     )
 
     // comments
-    queryClient.prefetchQuery(["comments", issue.number], () =>
+    queryClient.prefetchQuery(["issue", issue.number, "comments"], () =>
       getIssueComments(issue.number)
     )
   }
