@@ -3,10 +3,15 @@ import { IssueList } from "../components/IssueList"
 import { LabelPicker } from "../components/LabelPicker"
 import { useIssues } from "../hooks"
 import LoadingIcon from "../../shared/components/LoadingIcon"
+import { State } from "../interfaces"
 
 export const ListView = () => {
   const [selectedLabels, setSelectedLabels] = React.useState<string[]>([])
-  const { issuesQuery } = useIssues()
+  const [state, setState] = React.useState<State>()
+  const { issuesQuery } = useIssues({
+    state,
+    labels: selectedLabels,
+  })
 
   const onLabelChanged = (labelName: string) => {
     /*
@@ -23,7 +28,11 @@ export const ListView = () => {
         {issuesQuery.isLoading ? (
           <LoadingIcon />
         ) : (
-          <IssueList issues={issuesQuery.data || []} />
+          <IssueList
+            issues={issuesQuery.data || []}
+            state={state}
+            onStateChange={(newState) => setState(newState)}
+          />
         )}
       </div>
 

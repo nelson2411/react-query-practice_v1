@@ -6,7 +6,6 @@ import LoadingIcon from "../../shared/components/LoadingIcon"
 
 export const IssueView = () => {
   const params = useParams()
-  console.log(params.id)
   const { id = "0" } = params
 
   const { issueQuery, commentsQuery } = useIssue(+id)
